@@ -8,12 +8,25 @@ airports = ['ATL', 'ORD', 'DFW', 'DEN', 'JFK',
 people = ["Susan", "Barbara", "Richard", "Jennifer", "Noah",
           "David", "Robert", "William", "Michael", "Joseph",
           "Dylan", "Thomas", "Jessica", "Nathan", "Matthew",
-          "James", "Jeremy", "Vincent", "Mary", "Elizabeth",
-          "Nancy", "Daniel", "Karen", "Lisa", "Christopher"]
+          "Nancy", "Daniel", "Karen", "Brandon", "Jonathan",
+          "James", "Jeremy", "Vincent", "Mary", "Elizabeth"]
 
-# read flight data
+# load flight data
 raw = open("flights.txt", "r")
 flights = raw.readlines()
+
+
+def schedule(r):
+    for i in range(int(len(r) / 2)):
+        name = people[i]
+        origin = airports[i]
+        l1 = getFlightInfo(origin, destination, r[i * 2])
+        l2 = getFlightInfo(destination, origin, r[i * 2 + 1])
+        result1 = l1.split(",")[-4:]
+        result2 = l2.split(",")[-4:]
+        print('%10s %10s %5s-%5s $%3s $%3s %5s-%5s $%3s $%3s' % (
+            name, origin, result1[0], result1[1], result1[2], result1[3][0],
+            result2[0], result2[1], result2[2], result2[3][0]))
 
 
 def getFlightInfo(departure, arrive, index):
