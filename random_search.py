@@ -17,7 +17,7 @@ def randomMethod(dom, func):
 
 if __name__ == "__main__":
     # no optimization
-    domain = [(0, 8)] * (len(LossFunction.people) * 2)
+    domain = [(0, 9)] * (len(LossFunction.people) * 2)
     r = [random.randint(domain[i][0], domain[i][1]) for i in range(len(domain))]
     # optimization
     s = randomMethod(domain, LossFunction.totalCost)
