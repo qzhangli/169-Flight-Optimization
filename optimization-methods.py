@@ -23,10 +23,12 @@ def annealingMethod(dom, func, T=1000.0, t=0.98, alpha=1e-2, step=1, k_max=1e3):
         i = random.randint(0, len(dom) - 1)
         delta = random.randint(-step, step)
         new = ini[:i] + [ini[i] + delta] + ini[i+1:]
-        if new[i] < dom[i][0]:
-            new[i] = dom[i][0]
-        elif new[i] > dom[i][1]:
-            new[i] = dom[i][1]
+        lower = dom[i][0]
+        upper = dom[i][1]
+        if new[i] < lower:
+            new[i] = lower
+        elif new[i] > upper:
+            new[i] = upper
         y = func(ini)
         yp = func(new)
         p = pow(math.e, (- y - yp) / T)
