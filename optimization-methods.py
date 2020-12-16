@@ -88,16 +88,21 @@ def genetic_opt(domain, func, population=100, mutprob=0.2, survive_rate=0.2, max
         parent = select_parent(func, pop, survivor_num)
 
         # crossover
-        while len(parent) < population:
+        children = []
+        while (len(parent) + len(children)) < population:
             c1 = random.randint(0, survivor_num-1)  # only choose from survivors
             c2 = random.randint(0, survivor_num-1)
-            parent.append(crossover(parent[c1], parent[c2]))
-        for i in range(len(parent)):
+            children.append(crossover(parent[c1], parent[c2]))
+        # mutation
+        for i in range(len(children)):
             if random.random() < mutprob:
-                parent[i] = mutate(parent[i])
+                parent.append(mutate(children[i]))
+            else:
+                parent.append(children[i])
 
         # update population
         pop = parent
+    sorted(pop, key = lambda X:func(X))
     return pop[0]
 
 
