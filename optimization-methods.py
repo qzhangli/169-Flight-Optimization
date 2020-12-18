@@ -107,8 +107,8 @@ def genetic_opt(domain, func, population=100, mutprob=0.2, survive_rate=0.2, max
 
 
 if __name__ == "__main__":
-    domain = [(0, 9)] * (len(LossFunction.people) * 2)      # no optimization
-    n = [random.randint(domain[i][0], domain[i][1]) for i in range(len(domain))]
+    domain = [(0, 9)] * (len(LossFunction.people) * 2)      # domain
+    n = [random.randint(domain[i][0], domain[i][1]) for i in range(len(domain))] # no optimization
     r = randomMethod(domain, LossFunction.totalCost)        # random optimization
     s = annealingMethod(domain, LossFunction.totalCost)     # annealing optimization
     g = genetic_opt(domain, LossFunction.totalCost)         # genetic optimization
